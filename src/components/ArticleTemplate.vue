@@ -1,11 +1,35 @@
 <template>
 	<div id="articleTemplate">
+		<!-- 文章大标题
+		<div class="aTitle">{{ title }}</div>
+		作者信息
+		<div class="articleInfo">
+			作者头像
+			<div class="authorPort">
+				<img :src="port" />
+			</div>
+			作者名称、发表时间
+			<div>
+				<div class="author">{{ author }}</div>
+				<div class="time">{{ date }}</div>
+			</div>
+		</div>-->
 		<slot></slot>
 	</div>
 </template>
 
 <script>
-export default {};
+export default {
+	// props: {
+	// 	title: String,
+	// 	author: String,
+	// 	port: {
+	// 		type: String,
+	// 		default: "https://eget.tansent.top/port.png"
+	// 	},
+	// 	date: String
+	// }
+};
 </script>
 
 <style lang="scss">
@@ -16,6 +40,7 @@ export default {};
 	// 文章标题
 	.aTitle {
 		font-size: 2rem;
+		font-weight: 700;
 		text-align: center;
 		color: #303133;
 	}
@@ -49,40 +74,46 @@ export default {};
 	.aTitle1 {
 		font-size: 1.8rem;
 		margin: 15px 0;
+		font-weight: bolder;
+		// letter-spacing: 0.1rem;
 		// 移入特效
-		&:hover {
-			color: #409eff;
-		}
-		&::before {
-			content: "#";
-			color: #409eff;
-		}
+		// &:hover {
+		// 	color: #409eff;
+		// }
+		// &::before {
+		// 	content: "#";
+		// 	// color: #409eff;
+		// }
 	}
 	// 2号标题
 	.aTitle2 {
 		font-size: 1.5rem;
 		margin: 10px 0;
+		font-weight: bold;
+		// letter-spacing: 0.1rem;
+
 		// 移入特效
-		&:hover {
-			color: rgb(83, 168, 255);
-		}
-		&::before {
-			color: rgb(83, 168, 255);
-			content: "#";
-		}
+		// &:hover {
+		// 	color: rgb(83, 168, 255);
+		// }
+		// &::before {
+		// 	// color: rgb(83, 168, 255);
+		// 	content: "#";
+		// }
 	}
 	// 3号标题
 	.aTitle3 {
 		font-size: 1.2rem;
 		margin: 5px 0;
+		font-weight: 600;
 		// 移入特效
-		&:hover {
-			color: rgb(102, 177, 255);
-		}
-		&::before {
-			color: rgb(102, 177, 255);
-			content: "#";
-		}
+		// &:hover {
+		// 	color: rgb(102, 177, 255);
+		// }
+		// &::before {
+		// 	// color: rgb(102, 177, 255);
+		// 	content: "#";
+		// }
 	}
 	// 段落
 	p {
@@ -92,57 +123,22 @@ export default {};
 	}
 	// 文章中的图片
 	.img {
-		display: grid;
-		grid-template-rows: 1fr auto;
-		// 多分几列，防止超大屏时图片不能居中问题
-		grid-template-columns: repeat(13, 1fr);
-		grid-row-gap: 10px;
+		max-width: 100%;
 		margin: 20px 0;
 		img {
-			grid-column-start: 7;
-			grid-column-end: 8;
-			height: 30vh;
-			// max-width: 100%;
+			display: table;
+			margin: 0 auto;
 			// 防止图片过高
-			max-height: 200px;
-			transition: 0.3s all;
-			&:active {
-				// 4倍的话： translateY(-37.5%) 不向下扩展 1.5 / 4 = 3 / 8 = 0.375
-				transform: scale(3.3) translateY(-25%);
-			}
+			// max-height: 30vh;
+			// 防止图片过宽
+			max-width: 100%;
 		}
 		// 图片说明
 		.imgText {
-			grid-column-start: 7;
-			grid-column-end: 8;
+			margin-top: 4px;
 			text-align: center;
 			font-size: 0.8rem;
 			color: #909399;
-		}
-	}
-}
-
-@media screen and (max-width: 1000px) {
-	#articleTemplate {
-		// 当屏幕过小是图片变大可能会导致有些地方看不到
-		// 所以适当的调整变大倍数
-		.img {
-			img {
-				&:hover {
-					transform: scale(2);
-				}
-			}
-		}
-	}
-}
-@media screen and (max-width: 1200px) and (min-width: 1000px) {
-	#articleTemplate {
-		.img {
-			img {
-				&:hover {
-					transform: scale(3);
-				}
-			}
 		}
 	}
 }

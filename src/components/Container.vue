@@ -1,5 +1,5 @@
 <template>
-	<div id="container">
+	<div id="container" class="container">
 		<div class="slotLeft">
 			<slot name="left"></slot>
 		</div>
@@ -21,7 +21,6 @@ export default {
 #container {
 	display: flex;
 	flex-direction: row;
-	// width: 100vw;
 	margin: 0 auto;
 	box-sizing: border-box;
 	overflow: hidden;
@@ -29,14 +28,14 @@ export default {
 		box-sizing: border-box;
 		padding: 20px;
 		width: 100%;
-		overflow-x: hidden;
+		overflow: hidden;
 	}
 	.slotRight {
 		// 小屏时隐藏右侧栏
 		display: none;
 		box-sizing: border-box;
 		padding: 20px;
-		overflow-x: hidden;
+		overflow: hidden;
 	}
 }
 

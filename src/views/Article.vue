@@ -1,8 +1,9 @@
 <template>
-	<div class="about">
+	<div id="article">
 		<header-bar></header-bar>
+		<!-- 主页内容容器 -->
 		<container>
-			<div slot="left">
+			<div class="left" slot="left">
 				<article-template>
 					<!-- 通过html字符串格式载入文章 -->
 					<div v-html="article"></div>
@@ -19,14 +20,13 @@
 import HeaderBar from "@/components/HeaderBar";
 import FooterBar from "@/components/FooterBar";
 import Container from "@/components/Container";
-import ArticleTemplate from "@/components/ArticleTemplate";
 import InfoCard from "@/components/InfoCard";
 import ArticleMenu from "@/components/ArticleMenu";
+import ArticleTemplate from "@/components/ArticleTemplate";
 
 export default {
 	data() {
 		return {
-			aboutTitle: "关于",
 			article: ""
 		};
 	},
@@ -39,11 +39,13 @@ export default {
 		ArticleMenu
 	},
 	created() {
+		// 路由传参接收this.$route.params
+		// console.log(this.$route.params);
 		// 通过标题获得文章内容
 		this.axios
 			.get("article.php", {
 				params: {
-					title: this.aboutTitle
+					title: this.$route.params.articleTitle
 				}
 			})
 			.then(res => {
@@ -60,4 +62,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#article {
+}
 </style>

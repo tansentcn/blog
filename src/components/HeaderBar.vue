@@ -8,13 +8,13 @@
 				<!-- 菜单、导航栏 -->
 				<nav class="navPC">
 					<div class="nav-item" @click="to('home')">首页</div>
-					<div class="nav-item" @click="to('home')">留言板</div>
+					<!-- <div class="nav-item" @click="to('home')">留言板</div> -->
 					<div class="nav-item" @click="to('about')">关于</div>
 				</nav>
 			</div>
 			<!-- 用户板块 -->
-			<div class="user">
-				<!-- 登录状态 -->
+			<!-- <div class="user">
+				登录状态
 				<template v-if="hasLogin">
 					<div class="userPort">
 						<el-avatar :size="userPortSize" :src="userPort"></el-avatar>
@@ -22,30 +22,23 @@
 					<div class="userName">用户名</div>
 					<div class="userExit" @click="hasLogin = false">注销</div>
 				</template>
-				<!-- 未登录 游客状态 -->
+				未登录 游客状态
 				<template v-else>
 					<div class="login" @click="hasLogin = true">登录</div>
 					<div class="register">注册</div>
 				</template>
-			</div>
+			</div>-->
 			<!-- 手机端/小屏时的菜单 -->
 			<div class="navMoible">
-				<!-- <el-dropdown>
-					<span class="el-dropdown-link">
-						下拉菜单
-						<i class="el-icon-arrow-down el-icon--right"></i>
-					</span>
-					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item class="nav-item" @click="to('home')">首页</el-dropdown-item>
-						<el-dropdown-item>留言板</el-dropdown-item>
-						<el-dropdown-item>关于</el-dropdown-item>
-					</el-dropdown-menu>
-				</el-dropdown>-->
-				<div>=</div>
+				<div class="icon">=</div>
 				<ul>
-					<li class="nav-item" @click="to('home')">首页</li>
+					<li>
+						<div class="nav-item" @click="to('home')">首页</div>
+					</li>
 					<!-- <li class="nav-item" @click="to('home')">留言板</li> -->
-					<li class="nav-item" @click="to('about')">关于</li>
+					<li>
+						<div class="nav-item" @click="to('about')">关于</div>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -95,6 +88,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/font";
+
 $headerHeight: 80px;
 
 #headerBar {
@@ -130,10 +125,10 @@ $headerHeight: 80px;
 			.logo {
 				font-size: 1.8rem;
 				font-weight: 700;
-				transition: 0.8s all;
+				transition: 0.3s all;
 				&:hover {
-					color: aqua;
-					transform: rotateY(360deg);
+					color: $font-color-active;
+					// transform: rotateY(360deg);
 				}
 			}
 			// 导航栏
@@ -150,8 +145,9 @@ $headerHeight: 80px;
 					cursor: pointer;
 					// 鼠标移入动画
 					&:hover {
-						border-bottom: 2px aquamarine solid;
-						color: aquamarine;
+						border-bottom: 2px #409eff solid;
+						// color: aquamarine;
+						color: $font-color-active;
 					}
 					// 分隔菜单项
 					&:nth-child(even) {
@@ -206,7 +202,7 @@ $headerHeight: 80px;
 		// 显示手机端/小屏端导航菜单
 		.navMoible {
 			display: block !important;
-			div {
+			.icon {
 				font-size: 2rem;
 				text-align: center;
 				padding: 0 17px;
@@ -218,17 +214,22 @@ $headerHeight: 80px;
 			ul {
 				display: none;
 				background-color: #f2f6fc;
-				// height: auto;
 				border: 1px solid #ebeef5;
 				border-radius: 2px;
+				&:hover {
+					display: block;
+				}
 				li {
-					// text-align: center;
-					font-size: 1.2rem;
-					height: 20px;
-					line-height: 20px;
+					list-style-type: none;
+					color: #606266;
 					margin: 8px;
 
-					list-style-type: none;
+					.nav-item {
+						// display: inline-block;
+						font-size: 1.2rem;
+						height: 20px;
+						line-height: 20px;
+					}
 				}
 			}
 		}
