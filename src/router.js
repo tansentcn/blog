@@ -29,7 +29,7 @@ export default new Router({
       // name: 'about',
       component: About
     }, {
-      path: '/articleTitle=:articleTitle',
+      path: '/articleId=:id',
       // path: '/article',
       name: "article",
       component: Article
@@ -40,7 +40,6 @@ export default new Router({
       // 其他不匹配路径跳转到主页
       path: "*",
       redirect: '/'
-      // component: HelloWorld
     }
   ]
 })

@@ -1,38 +1,40 @@
 <template>
 	<div id="articleTemplate">
-		<!-- 文章大标题
+		<!-- 文章大标题 -->
 		<div class="aTitle">{{ title }}</div>
-		作者信息
+		<!-- 作者信息 -->
 		<div class="articleInfo">
-			作者头像
+			<!-- 作者头像 -->
 			<div class="authorPort">
 				<img :src="port" />
 			</div>
-			作者名称、发表时间
+			<!-- 作者名称、发表时间 -->
 			<div>
 				<div class="author">{{ author }}</div>
-				<div class="time">{{ date }}</div>
+				<div class="time">{{ artTime }}</div>
 			</div>
-		</div>-->
+		</div>
 		<slot></slot>
 	</div>
 </template>
 
 <script>
 export default {
-	// props: {
-	// 	title: String,
-	// 	author: String,
-	// 	port: {
-	// 		type: String,
-	// 		default: "https://eget.tansent.top/port.png"
-	// 	},
-	// 	date: String
-	// }
+	props: {
+		title: String,
+		author: String,
+		port: {
+			type: String,
+			default: "https://api.tansent.top/assets/port-qq.jpg"
+		},
+		artTime: String
+	}
 };
 </script>
 
 <style lang="scss">
+// 这里不能加scoped
+
 // 文章模板模板样式
 #articleTemplate {
 	color: #606266;
@@ -75,45 +77,40 @@ export default {
 		font-size: 1.8rem;
 		margin: 15px 0;
 		font-weight: bolder;
-		// letter-spacing: 0.1rem;
-		// 移入特效
-		// &:hover {
-		// 	color: #409eff;
-		// }
-		// &::before {
-		// 	content: "#";
-		// 	// color: #409eff;
-		// }
 	}
 	// 2号标题
 	.aTitle2 {
 		font-size: 1.5rem;
 		margin: 10px 0;
 		font-weight: bold;
-		// letter-spacing: 0.1rem;
-
-		// 移入特效
-		// &:hover {
-		// 	color: rgb(83, 168, 255);
-		// }
-		// &::before {
-		// 	// color: rgb(83, 168, 255);
-		// 	content: "#";
-		// }
 	}
 	// 3号标题
 	.aTitle3 {
 		font-size: 1.2rem;
 		margin: 5px 0;
 		font-weight: 600;
-		// 移入特效
-		// &:hover {
-		// 	color: rgb(102, 177, 255);
-		// }
-		// &::before {
-		// 	// color: rgb(102, 177, 255);
-		// 	content: "#";
-		// }
+	}
+	.aTitle1,
+	.aTitle2,
+	.aTitle3 {
+		&:target {
+			a {
+				color: #6cb5ff;
+				&::before {
+					content: "#";
+				}
+			}
+		}
+		&::before {
+			content: "";
+			display: block;
+			margin-top: -90px;
+			height: 90px;
+			visibility: hidden;
+		}
+		a {
+			color: #606266;
+		}
 	}
 	// 段落
 	p {

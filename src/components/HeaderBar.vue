@@ -13,8 +13,8 @@
 				</nav>
 			</div>
 			<!-- 用户板块 -->
-			<!-- <div class="user">
-				登录状态
+			<div class="user">
+				<!-- 登录状态 -->
 				<template v-if="hasLogin">
 					<div class="userPort">
 						<el-avatar :size="userPortSize" :src="userPort"></el-avatar>
@@ -22,12 +22,15 @@
 					<div class="userName">用户名</div>
 					<div class="userExit" @click="hasLogin = false">注销</div>
 				</template>
-				未登录 游客状态
+				<!-- 未登录 游客状态 -->
 				<template v-else>
-					<div class="login" @click="hasLogin = true">登录</div>
+					<div class="login" @click="login">登录</div>
 					<div class="register">注册</div>
 				</template>
-			</div>-->
+			</div>
+			<template v-if="logining">
+				<login-card></login-card>
+			</template>
 			<!-- 手机端/小屏时的菜单 -->
 			<div class="navMoible">
 				<div class="icon">=</div>
@@ -46,13 +49,15 @@
 </template>
 
 <script>
+import LoginCard from "@/components/LoginCard.vue";
+
 export default {
 	data() {
 		return {
 			hasLogin: false,
-			userPortSize: "small",
-			userPort:
-				"https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+			userPortSize: 50,
+			userPort: "https://api.tansent.top/assets/port-qq.jpg",
+			logining: false
 		};
 	},
 	props: {
@@ -69,9 +74,28 @@ export default {
 			default: true
 		}
 	},
+	components: {
+		LoginCard
+	},
 	methods: {
+		// 路由跳转
 		to: function(page) {
 			this.$router.push(page);
+		},
+		login: function() {
+			this.openFullScreen();
+		},
+		openFullScreen() {
+			const loading = this.$loading({
+				lock: true,
+				text: "Loading",
+				spinner: "el-icon-loading",
+				background: "rgba(0, 0, 0, 0.7)"
+			});
+			this.logining = true;
+			setTimeout(() => {
+				loading.close();
+			}, 2000);
 		}
 	},
 	computed: {
@@ -96,8 +120,9 @@ $headerHeight: 80px;
 	// 撑开容器
 	height: $headerHeight;
 	box-sizing: border-box;
-
 	width: 100vw;
+	// 禁止用户选中文字
+	user-select: none;
 	.container {
 		// 固定于浏览器顶端
 		position: fixed;
@@ -164,18 +189,24 @@ $headerHeight: 80px;
 		.user {
 			display: flex;
 			flex-direction: row;
+			align-items: center;
 			margin-right: 40px;
 			// 鼠标设置为手形状
 			cursor: pointer;
-			div {
+			// 用户头像
+			.userPort {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+			}
+			> div {
 				// 鼠标移入动画
 				&:hover {
-					// border-bottom: 2px aquamarine solid;
-					color: aquamarine;
+					color: $font-color-active;
 				}
 				// 分隔菜单项
 				&:nth-child(even) {
-					margin: 0 10px;
+					margin: 0 20px;
 				}
 				// 取消最后一个菜单的右margin
 				&:last-child {
@@ -188,8 +219,9 @@ $headerHeight: 80px;
 		}
 	}
 }
+
 // 小屏/手机时
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
 	#headerBar {
 		// 隐藏电脑/大屏端的菜单
 		.navPC {

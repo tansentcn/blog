@@ -3,9 +3,9 @@
 		<header-bar></header-bar>
 		<container>
 			<div slot="left">
-				<article-template>
+				<article-template :title="article.title" :author="author" :art-time="article.artTime" :star="-1">
 					<!-- 通过html字符串格式载入文章 -->
-					<div v-html="article"></div>
+					<div v-html="article.art"></div>
 				</article-template>
 			</div>
 			<info-card slot="right"></info-card>
@@ -26,8 +26,8 @@ import ArticleMenu from "@/components/ArticleMenu";
 export default {
 	data() {
 		return {
-			aboutTitle: "关于",
-			article: ""
+			article: "",
+			author: "TanSent"
 		};
 	},
 	components: {
@@ -41,16 +41,12 @@ export default {
 	created() {
 		// 通过标题获得文章内容
 		this.axios
-			.get("article.php", {
-				params: {
-					title: this.aboutTitle
-				}
-			})
+			.get("about.php")
 			.then(res => {
-				// console.log(res);
 				var data =
 					typeof res.data == "object" ? res.data : JSON.parse(res.data);
-				this.article = data.articles[0].art;
+				this.article = data.articles[0];
+				// console.log(data);
 			})
 			.catch(err => {
 				console.log(err);

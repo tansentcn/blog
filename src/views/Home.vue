@@ -5,7 +5,7 @@
 		<!-- <div class="container">首页内容设计中……</div> -->
 		<container>
 			<div slot="left">
-				<div v-for="(article,index) in articles" :key="index" @click="showArt(article.title)">
+				<div v-for="(article,index) in articles" :key="index" @click="showArt(article.id)">
 					<article-thumb :title="article.title" :msg="article.msg"></article-thumb>
 				</div>
 			</div>
@@ -38,14 +38,14 @@ export default {
 		ArticleThumb
 	},
 	methods: {
-		showArt: function(art) {
+		showArt: function(id) {
 			// console.log(art);
 			// 跳转至文章页面
 			this.$router.push({
 				name: "article",
 				params: {
-					// 传递文章标题
-					articleTitle: art
+					// 传递文章ID
+					id: id
 				}
 			});
 		}
@@ -53,7 +53,7 @@ export default {
 	created() {
 		// 获取文章列表
 		this.axios
-			.get("getArticles.php")
+			.get("articles.php")
 			.then(res => {
 				// console.log(res.data);
 				var data =
